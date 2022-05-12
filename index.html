@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Digital_clock</title>
+	<link rel="stylesheet" href="style.css">
+</head>
+<body onload="inclock()">
+	  <div class="heading">
+	  	
+	  </div>
+     <div class="date_time">
+     	 <div class="date">
+     	 	 <span id="dname">Day</span>
+     	 	 <span id="dmonth">Month</span>
+     	 	 <span id="dnum">00</span>
+     	 	 <span id="dyear">Year</span>
+     	 </div>
+
+     	 <div class="time">
+     	 	  <span id="ho">00</span>:
+     	 	  <span id="mi">00</span>:
+     	 	  <span id="se">00</span>
+     	 	  <span id="pe">AM</span>
+     	 </div>
+     </div>
+
+
+     <!-- start javascript coding -->
+      <script>
+      	function upclock()
+      	{
+           var now = new Date();
+           var d = now.getDay(),
+               m = now.getMonth(),
+               dn = now.getDate(),
+               yr = now.getFullYear(),
+               h = now.getHours(),
+               min = now.getMinutes(),
+               s = now.getSeconds(),
+               p = "AM";
+               
+               if(h==0)
+               {
+               	h = 12;
+               }
+               if(h>12)
+               {
+               	h = h-12;
+               	p = "PM";
+               }
+
+                Number.prototype.pad = function(digits)
+                {
+                	for(var n = this.toString(); n.length<digits; n = 0+n);
+                		return n;
+                }
+
+
+
+               var months = ["January","February","March","April","May","June","July","August","September","October","November","December"];
+
+               var week = ["Sunday","Monday","Tuesday","Wednesday","Thusday","Friday","Satarday"];
+
+               var ids = ["dname","dmonth","dnum","dyear","ho","mi","se","pe"];
+
+               var values = [week[d], months[m], dn.pad(2),yr,h.pad(2),min.pad(2),s.pad(2),p];
+
+               for(var i = 0;i<ids.length;i++)
+               {
+               	document.getElementById(ids[i]).firstChild.nodeValue = values[i];
+               }
+
+      	}
+
+
+      	function inclock()
+      	{
+      		upclock();
+      		window.setInterval("upclock()", 1);
+
+      	}
+      </script>
+
+     <!-- end javascript coding -->
+</body>
+</html>
